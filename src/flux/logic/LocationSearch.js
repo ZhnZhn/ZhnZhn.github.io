@@ -1,6 +1,4 @@
-import {
-  showAsk
-} from '../actions/ComponentActions';
+import { showAsk } from '../stores/compStore';
 import LocationQuery from './LocationQuery';
 
 const { crOptions } = LocationQuery;

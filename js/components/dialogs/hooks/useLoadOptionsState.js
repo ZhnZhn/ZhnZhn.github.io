@@ -3,8 +3,8 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.default = void 0;
+var _compStore = require("../../../flux/stores/compStore");
 var _uiApi = require("../../uiApi");
-var _ComponentActions = require("../../../flux/actions/ComponentActions");
 var _crOptions = _interopRequireDefault(require("./crOptions"));
 const _crInitialState = () => ({
   isLoading: false,
@@ -20,10 +20,7 @@ const useLoadOptionsState = jsonProp => {
     }, []),
     setLoadingFailed = (0, _uiApi.useCallback)((errCaption, errDescription) => {
       if (errCaption || errDescription) {
-        (0, _ComponentActions.showAlert)({
-          alertCaption: errCaption,
-          alertDescr: errDescription
-        });
+        (0, _compStore.showAlertDialogBy)(errCaption, errDescription);
       }
       setState({
         isLoading: false,

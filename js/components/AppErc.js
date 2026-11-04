@@ -7,7 +7,7 @@ var _uiApi = require("./uiApi");
 var _styleFn = require("./styleFn");
 var _LocationSearch = require("../flux/logic/LocationSearch");
 var _settingStore = require("../flux/stores/settingStore");
-var _ComponentActions = require("../flux/actions/ComponentActions");
+var _compStore = require("../flux/stores/compStore");
 var _browserStore = require("../flux/stores/browserStore");
 var _itemStore = require("../flux/stores/itemStore");
 var _useHotKeysHandler = _interopRequireDefault(require("./hotkeys/useHotKeysHandler"));
@@ -20,11 +20,11 @@ var _checkBuild = _interopRequireDefault(require("./checkBuild"));
 var _jsxRuntime = require("react/jsx-runtime");
 const BUILD_DATE = "29-10-2026",
   CL_COMP_CONTAINER = (0, _styleFn.crFlexRowCn)("app-container");
-const _showSettings = (0, _uiApi.bindTo)(_ComponentActions.showSettings, (0, _settingStore.exportSettingFn)());
+const _showSettings = (0, _uiApi.bindTo)(_compStore.showSettings, (0, _settingStore.exportSettingFn)());
 const AppErc = () => {
   (0, _uiApi.useEffect)(() => {
     (0, _LocationSearch.showAskDialogIf)();
-    (0, _checkBuild.default)(BUILD_DATE, _ComponentActions.showReload);
+    (0, _checkBuild.default)(BUILD_DATE, _compStore.showReload);
   }, []);
   (0, _useHotKeysHandler.default)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {

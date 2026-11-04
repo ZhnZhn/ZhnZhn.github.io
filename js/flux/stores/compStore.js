@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsAbout = exports.useMdOption = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showAlertDialogBy = exports.showAlertDialog = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = void 0;
+exports.useMsShowDialog = exports.useMsCloseDialog = exports.useMsAbout = exports.useMdOption = exports.showZoom = exports.showSettings = exports.showReload = exports.showPasteTo = exports.showOptionDialog = exports.showModalDialog = exports.showDialog = exports.showDescription = exports.showCustomizeExport = exports.showAsk = exports.showAlertDialogBy = exports.showAlertDialog = exports.showAddToWatch = exports.showAbout = exports.hideAbout = exports.closeDialog = exports.closeChartContainer = void 0;
 var _storeApi = require("../storeApi");
 var _ModalDialogType = require("../../constants/ModalDialogType");
 var _chartCheckBoxLogic = require("./chartCheckBoxLogic");
@@ -31,17 +31,22 @@ const closeChartContainer = (chartType, browserType) => {
 };
 exports.closeChartContainer = closeChartContainer;
 const useMdOption = exports.useMdOption = (0, _storeApi.fCrUse)(_compStore, _selectMdOption);
-const showModalDialog = function (modalDialogType, option) {
-  if (option === void 0) {
-    option = {};
-  }
+const showModalDialog = (modalDialogType, option = {}) => {
   option.modalDialogType = modalDialogType;
   _set(_crMdOption({
     ...option
   }));
 };
 exports.showModalDialog = showModalDialog;
-const showAlertDialog = exports.showAlertDialog = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ALERT);
+const showDescription = exports.showDescription = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_DESCRIPTION),
+  showSettings = exports.showSettings = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_SETTINGS),
+  showPasteTo = exports.showPasteTo = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_PASTE_TO),
+  showZoom = exports.showZoom = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ZOOM),
+  showReload = exports.showReload = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_RELOAD),
+  showAsk = exports.showAsk = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ASK),
+  showCustomizeExport = exports.showCustomizeExport = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_CUSTOMIZE_EXPORT),
+  showAddToWatch = exports.showAddToWatch = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ADD_TO_WATCH),
+  showAlertDialog = exports.showAlertDialog = (0, _storeApi.bindTo)(showModalDialog, _ModalDialogType.MDT_ALERT);
 const showAlertDialogBy = (alertCaption, alertDescr) => showAlertDialog({
   alertCaption,
   alertDescr

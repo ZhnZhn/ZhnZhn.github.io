@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
- //Highcharts dataFormat require jsdom
-"use strict";
+import { testSpyOn } from '@testHelpers';
+
 import {
   getActiveContCheckBox,
   setActiveContainer
@@ -22,8 +19,7 @@ const _crChb = (
   chartType,
   setUnchecked: () => {}
 });
-const _crSpyUnchecked = (chb) => jest
-  .spyOn(chb, 'setUnchecked');
+const _crSpyUnchecked = (chb) => testSpyOn(chb, 'setUnchecked');
 
 
 describe('compStore', ()=>{

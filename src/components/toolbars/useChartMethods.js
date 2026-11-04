@@ -1,5 +1,4 @@
-import { showCustomizeExport } from '../../flux/actions/ComponentActions';
-
+import { showCustomizeExport } from '../../flux/stores/compStore';
 import { isFn } from '../uiApi';
 import { useRefInit } from '../hooks/useProperty';
 

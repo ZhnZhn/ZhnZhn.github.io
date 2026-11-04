@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 exports.__esModule = true;
 exports.showAskDialogIf = void 0;
-var _ComponentActions = require("../actions/ComponentActions");
+var _compStore = require("../stores/compStore");
 var _LocationQuery = _interopRequireDefault(require("./LocationQuery"));
 const {
   crOptions
@@ -23,7 +23,7 @@ const _trSearchToOptions = () => {
 const showAskDialogIf = () => {
   const options = _trSearchToOptions();
   if (options) {
-    (0, _ComponentActions.showAsk)({
+    (0, _compStore.showAsk)({
       options
     });
   }

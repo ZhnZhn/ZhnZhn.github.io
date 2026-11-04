@@ -23,14 +23,17 @@ import {
 
 import { isWideWidth } from "../../components/has";
 
-import { showDescription } from "../actions/ComponentActions";
-
 import {
   loadItem,
   showItemsContainer
 } from "../stores/itemStore";
-import { showAlertDialogBy } from "../stores/compStore";
-import { getKey } from "../stores/settingStore";
+import {
+  showDescription,
+  showAlertDialogBy
+} from "../stores/compStore";
+import {
+  getKey
+} from "../stores/settingStore";
 
 import { getDialog } from "../../routers/loadDialog";
 import { getLoadFn } from "./RouterLoadFn";
@@ -96,7 +99,7 @@ const _onError = (
 const _crClickAbout = ({
   rootUri,
   descr
-}) => {  
+}) => {
   const _descrToken = isStr(descr) && descr.slice(0, 2) === "./"
     ? descr
     : isStr(descr) && rootUri

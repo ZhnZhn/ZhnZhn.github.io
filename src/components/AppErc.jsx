@@ -11,7 +11,7 @@ import { exportSettingFn } from "../flux/stores/settingStore";
 import {
   showSettings,
   showReload
-} from "../flux/actions/ComponentActions";
+} from "../flux/stores/compStore";
 import {
   useMsInitBrowser
 } from "../flux/stores/browserStore";

@@ -8,7 +8,8 @@ import {
   showAddToWatch,
   showPasteTo,
   showZoom
-} from "../../flux/actions/ComponentActions";
+} from "../../flux/stores/compStore";
+
 import {
   setActiveCheckbox
 } from "../../flux/stores/chartCheckBoxLogic";

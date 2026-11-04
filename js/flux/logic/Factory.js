@@ -8,7 +8,6 @@ var _dateFn = require("../../utils/dateFn");
 var _Msg = require("../../constants/Msg");
 var _LoadType = require("../../constants/LoadType");
 var _has = require("../../components/has");
-var _ComponentActions = require("../actions/ComponentActions");
 var _itemStore = require("../stores/itemStore");
 var _compStore = require("../stores/compStore");
 var _settingStore = require("../stores/settingStore");
@@ -27,13 +26,10 @@ const _crFnValue = (valueFn, valueFnPrefix) => {
 };
 const _crFromDate = nInitFromDate => nInitFromDate ? nInitFromDate === "1y+2d" //Coinpaprika
 ? (0, _dateFn.addDaysToYmd)((0, _dateFn.getFromDate)(1), 2) : (0, _dateFn.getFromDate)(nInitFromDate) : _initFromDate;
-const _crInitFromDate = _ref => {
-  let {
-    isFdw,
-    nInitFromDate
-  } = _ref;
-  return isFdw && !HAS_WIDE_WIDTH ? _initFromDate : _crFromDate(nInitFromDate);
-};
+const _crInitFromDate = ({
+  isFdw,
+  nInitFromDate
+}) => isFdw && !HAS_WIDE_WIDTH ? _initFromDate : _crFromDate(nInitFromDate);
 const _crDateProps = dialogProps => {
   const _props = dialogProps.isFd ? {
     errNotYmdOrEmpty: _Msg.YMD_DATE_OR_EMPTY,
@@ -46,32 +42,25 @@ const _crDateProps = dialogProps => {
     ..._props
   };
 };
-const _onError = function (alertDescr, alertCaption) {
-  if (alertCaption === void 0) {
-    alertCaption = "Request Error";
-  }
+const _onError = (alertDescr, alertCaption = "Request Error") => {
   (0, _compStore.showAlertDialogBy)(alertDescr, alertCaption);
 };
-const _crClickAbout = _ref2 => {
-  let {
-    rootUri,
-    descr
-  } = _ref2;
+const _crClickAbout = ({
+  rootUri,
+  descr
+}) => {
   const _descrToken = (0, _isTypeFn.isStr)(descr) && descr.slice(0, 2) === "./" ? descr : (0, _isTypeFn.isStr)(descr) && rootUri ? `${rootUri}${descr}` : '';
-  return _descrToken ? (0, _bindTo.bindTo)(_ComponentActions.showDescription, {
+  return _descrToken ? (0, _bindTo.bindTo)(_compStore.showDescription, {
     descrUrl: `${_descrToken}.json`
   }) : void 0;
 };
 const D_SELECT_N = "DialogSelectN",
   D_STAT_N = "DialogStatN";
-const _getDialogType = (dialogType, _ref3) => {
-  let {
-    selectProps,
-    dims,
-    dfProps
-  } = _ref3;
-  return dialogType || ((0, _isTypeFn.isArr)(selectProps) ? D_SELECT_N : void 0) || ((0, _isTypeFn.isArr)(dims) || dfProps?.dfId ? D_STAT_N : void 0);
-};
+const _getDialogType = (dialogType, {
+  selectProps,
+  dims,
+  dfProps
+}) => dialogType || ((0, _isTypeFn.isArr)(selectProps) ? D_SELECT_N : void 0) || ((0, _isTypeFn.isArr)(dims) || dfProps?.dfId ? D_STAT_N : void 0);
 const _modifyDialogPropsByLoadId = (dialogProps, loadId) => {
   if (!loadId) {
     dialogProps.loadId = _LoadType.LT_Q;
@@ -128,11 +117,8 @@ const crDialog = (browserType, dialogConf) => {
   }));
 };
 exports.crDialog = crDialog;
-const crOptionDialog = _ref4 => {
-  let {
-    dialogType
-  } = _ref4;
-  return (0, _loadDialog.getDialog)(dialogType).then(Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}, dialogType));
-};
+const crOptionDialog = ({
+  dialogType
+}) => (0, _loadDialog.getDialog)(dialogType).then(Comp => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {}, dialogType));
 exports.crOptionDialog = crOptionDialog;
 //# sourceMappingURL=Factory.js.map

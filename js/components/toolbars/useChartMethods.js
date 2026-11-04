@@ -2,12 +2,12 @@
 
 exports.__esModule = true;
 exports.default = void 0;
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _compStore = require("../../flux/stores/compStore");
 var _uiApi = require("../uiApi");
 var _useProperty = require("../hooks/useProperty");
 const useChartMethods = (getChart, onZoom, onCopy, onPasteTo) => (0, _useProperty.useRefInit)(() => ({
   onExport: () => {
-    (0, _ComponentActions.showCustomizeExport)({
+    (0, _compStore.showCustomizeExport)({
       chart: getChart()
     });
   },

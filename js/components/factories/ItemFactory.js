@@ -6,7 +6,7 @@ var _uiApi = require("../uiApi");
 var _crRouter = require("../../utils/crRouter");
 var _ChartFn = require("../../charts/ChartFn");
 var _mathFn = require("../../math/mathFn");
-var _ComponentActions = require("../../flux/actions/ComponentActions");
+var _compStore = require("../../flux/stores/compStore");
 var _chartCheckBoxLogic = require("../../flux/stores/chartCheckBoxLogic");
 var _itemStore = require("../../flux/stores/itemStore");
 var _propertyFromChart = require("../../flux/stores/propertyFromChart");
@@ -23,21 +23,20 @@ const _getIdKey = (config, index) => {
     } = zhConfig || {};
   return [id || `Id:${index}`, key || id || (0, _mathFn.crId)()];
 };
-const _fAddToWatch = (caption, config) => () => (0, _ComponentActions.showAddToWatch)({
+const _fAddToWatch = (caption, config) => () => (0, _compStore.showAddToWatch)({
   caption,
   config
 });
-const _fOnPasteToDialog = () => toChart => (0, _ComponentActions.showPasteTo)({
+const _fOnPasteToDialog = () => toChart => (0, _compStore.showPasteTo)({
   toChart,
   fromChart: (0, _propertyFromChart.getCopyFromChart)()
 });
-const _crAreaChart = _ref => {
-  let {
-    config,
-    index,
-    chartType,
-    props
-  } = _ref;
+const _crAreaChart = ({
+  config,
+  index,
+  chartType,
+  props
+}) => {
   const [id, key] = _getIdKey(config, index);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.ChartItem, {
     chartType: chartType,
@@ -50,16 +49,15 @@ const _crAreaChart = _ref => {
     onToTop: (0, _uiApi.bindTo)(_itemStore.moveToTop, chartType, id),
     onCopy: _propertyFromChart.copyChart,
     onPasteTo: _fOnPasteToDialog(),
-    onZoom: _ComponentActions.showZoom
+    onZoom: _compStore.showZoom
   }, key);
 };
-const _crMapChart = _ref2 => {
-  let {
-    config,
-    index,
-    chartType,
-    props
-  } = _ref2;
+const _crMapChart = ({
+  config,
+  index,
+  chartType,
+  props
+}) => {
   const [id, key] = _getIdKey(config, index);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Items.MapChartItem, {
     chartType: chartType,
@@ -68,16 +66,13 @@ const _crMapChart = _ref2 => {
     ...props
   }, key);
 };
-const _fItem = Comp => _ref3 => {
-  let {
-    config = {},
-    props
-  } = _ref3;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
-    config: config,
-    ...props
-  }, config.id);
-};
+const _fItem = Comp => ({
+  config = {},
+  props
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Comp, {
+  config: config,
+  ...props
+}, config.id);
 const _getCrItem = (0, _crRouter.crGetRoute)({
   [_CompItemType.CIT_EUROSTAT_MAP]: _crMapChart,
   [_CompItemType.CIT_TABLE]: _fItem(_Items.TableItem),

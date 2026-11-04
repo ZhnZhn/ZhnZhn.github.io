@@ -1,9 +1,12 @@
 import {
+  showAlertDialogBy 
+} from '../../../flux/stores/compStore';
+
+import {
   useState,
   useCallback
 } from '../../uiApi';
 
-import { showAlert } from '../../../flux/actions/ComponentActions';
 import crOptions from './crOptions';
 
 const _crInitialState = () => ({
@@ -24,10 +27,10 @@ const useLoadOptionsState = jsonProp => {
   }, [])
   , setLoadingFailed = useCallback((errCaption, errDescription) => {
       if (errCaption || errDescription) {
-        showAlert({
-          alertCaption: errCaption,
-          alertDescr: errDescription
-        })
+        showAlertDialogBy(
+          errCaption,
+          errDescription
+        )
       }
       setState({
         isLoading: false,

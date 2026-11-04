@@ -6,7 +6,6 @@ var _isTypeFn = require("../../utils/isTypeFn");
 var _bindTo = require("../../utils/bindTo");
 var _arrFn = require("../../utils/arrFn");
 var _BrowserType = require("../../constants/BrowserType");
-var _ComponentActions = require("../actions/ComponentActions");
 var _compStore = require("../stores/compStore");
 var _itemStore = require("../stores/itemStore");
 var _settingStore = require("../stores/settingStore");
@@ -49,7 +48,7 @@ const _crBrowserDynamic = (Comp, option) => {
     topicStyle: topicStyle,
     ItemOptionComp: (0, _RouterItemOption.getItemOptionComp)(itemOptionType),
     ItemComp: ItemComp,
-    onClickInfo: (0, _isTypeFn.isUndef)(ItemComp) ? void 0 : _ComponentActions.showDescription,
+    onClickInfo: (0, _isTypeFn.isUndef)(ItemComp) ? void 0 : _compStore.showDescription,
     useMsBrowserShow: _browserStore.useMsBrowserShow,
     useMsBrowserLoad: _browserStore.useMsBrowserLoad,
     onLoadMenu: (0, _bindTo.bindTo)(_browserStore.loadBrowser, {

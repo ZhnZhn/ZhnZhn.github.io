@@ -12,10 +12,16 @@ import {
   BT_STAT_ALL
 } from "../../constants/BrowserType";
 
-import { showDescription } from "../actions/ComponentActions";
-import { showModalDialog } from "../stores/compStore";
-import { showItemsContainer } from "../stores/itemStore";
-import { getProxy } from "../stores/settingStore";
+import {
+  showModalDialog,
+  showDescription
+} from "../stores/compStore";
+import {
+  showItemsContainer
+ } from "../stores/itemStore";
+import {
+  getProxy
+} from "../stores/settingStore";
 import {
   useMsBrowserLoad,
   useMsBrowserShow,

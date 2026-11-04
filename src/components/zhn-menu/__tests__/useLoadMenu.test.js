@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -29,7 +31,7 @@ const _expectResult = (
 describe('useLoadMenu', ()=>{
   test('should return correct state after actions', ()=>{
     const BROWSER_TYPE = "BROWSER_TYPE_1"
-    , _onLoadMenu = jest.fn()
+    , _onLoadMenu = crTestFn()
     , {
       result,
       rerender
