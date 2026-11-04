@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -23,8 +25,8 @@ const _actHookFn = (
 
 describe('useFnFocus', ()=>{
   test('should after call fn call ref focus', ()=>{
-    const fn = jest.fn()
-    , focus = jest.fn();
+    const fn = crTestFn()
+    , focus = crTestFn();
 
     const { result } = renderHook(() => useFnFocus(fn));
     const ref = _getHookRef(result);

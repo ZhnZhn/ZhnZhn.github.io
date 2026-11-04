@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   fGetLazyValue,
   fGetLazyValueAsync
@@ -6,7 +8,7 @@ import {
 describe("fGetLazyValue", ()=>{
   const fn = fGetLazyValue;
   test("should return function that get value created only once", () => {
-    const _crValue = jest.fn(() => ({ v: "value" }))
+    const _crValue = crTestFn(() => ({ v: "value" }))
     , _getValue = fn(_crValue)
     , _value = _getValue();
 
@@ -22,7 +24,7 @@ describe("fGetLazyValueAsync", ()=>{
   const fn = fGetLazyValueAsync;
   test("should return promisify value", async () => {
     const _value = { v: "value" }
-    , _crValue = jest.fn(() => Promise
+    , _crValue = crTestFn(() => Promise
       .resolve(_value)
     )
     , _getValue = fn(_crValue);
@@ -38,7 +40,7 @@ describe("fGetLazyValueAsync", ()=>{
 
   test("should get sync value after creating in case isGetValueSync argument", async () => {
     const _value = { v: "value" }
-    , _crValue = jest.fn(() => Promise
+    , _crValue = crTestFn(() => Promise
       .resolve(_value)
     )
     , _getValue = fn(_crValue);
@@ -56,7 +58,7 @@ describe("fGetLazyValueAsync", ()=>{
 
   test("should try recreat value in case promisify set void 0", async () => {
     let i = 0;
-    const _crValue = jest.fn(() => Promise
+    const _crValue = crTestFn(() => Promise
       .resolve(i<2 ? (i++, void 0) : i)
     )
     , _getValue = fn(_crValue);

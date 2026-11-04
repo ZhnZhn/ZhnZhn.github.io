@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
+import { crTestFn } from '@testHelpers';
+
 import zhnUtils from '../../_test-utils/zhn-test-utils';
 import InputText from '../InputText';
 
@@ -19,8 +16,8 @@ const {
 describe("InputText", () => {
   test('should render InputText with event handlers and ref', async ()=>{
     const initValue = 'abc'
-    , onEnter = jest.fn()
-    , onChange = jest.fn()
+    , onEnter = crTestFn()
+    , onChange = crTestFn()
     , refEl = createRef()
     //1 Test render
     , {

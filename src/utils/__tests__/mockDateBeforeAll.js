@@ -1,3 +1,4 @@
+import { crTestFn } from '@testHelpers';
 
 describe('mockDateBeforeAll', ()=>{
   test('', () => expect('').toBe(''))
@@ -10,8 +11,8 @@ describe('mockDateBeforeAll', ()=>{
    beforeAll(() => {
      const _Date = Date
      //2020-01-01 12:00:01
-     global.Date = jest.fn(() => FIXED_DATE)
-     global.Date.UTC = jest.fn(_Date.UTC)
+     global.Date = crTestFn(() => FIXED_DATE)
+     global.Date.UTC = crTestFn(_Date.UTC)
    })
    it('show mocked date', ()=>{
      console.log('Mocked Date', new Date().toISOString())

@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -12,7 +14,7 @@ const _getMsgs = result => result.current[0]
 
 describe('useValidationMessages',()=>{
   test('should return tuple with msgs and reference equal functions setMsgs, hClose',()=>{
-    const onClose = jest.fn()
+    const onClose = crTestFn()
     , {
       result
     } = renderHook(() => useValidationMessages(onClose));

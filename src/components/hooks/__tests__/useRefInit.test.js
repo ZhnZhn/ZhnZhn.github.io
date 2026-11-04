@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import { renderHook } from '@testing-library/react';
 import { useRefInit } from '../useProperty';
 
@@ -19,8 +21,8 @@ const _testRenderAndRerender = (
 
 describe('useRefInit', ()=>{
   test('should return computed by function value',()=>{
-    _testRenderAndRerender(jest.fn(()=>false), false)
-    _testRenderAndRerender(jest.fn(()=>true), true)
-    _testRenderAndRerender(jest.fn(()=>''), '')
+    _testRenderAndRerender(crTestFn(()=>false), false)
+    _testRenderAndRerender(crTestFn(()=>true), true)
+    _testRenderAndRerender(crTestFn(()=>''), '')
   })
 })

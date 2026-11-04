@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
+import { crTestFn } from '@testHelpers';
+
 import zhnUtils from '../../_test-utils/zhn-test-utils';
 import InputPattern from '../InputPattern';
 
@@ -20,9 +17,9 @@ describe("InputPattern", () => {
   const _getInput = () => screen.getByRole('textbox');
   const _findBtClear = () => screen.findByRole('button');
   test("should render InputPattern with event handlers and ref", async () => {
-    const onEnter = jest.fn()
-    , onClear = jest.fn()
-    , onTest = jest.fn(str => str.length < 4 )
+    const onEnter = crTestFn()
+    , onClear = crTestFn()
+    , onTest = crTestFn(str => str.length < 4 )
     , refEl = createRef()
     , initValue = "abc"
     //1 Test render

@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+                   
 import {
   crRouter,
   crGetRoute,
@@ -17,8 +19,8 @@ describe("crRouter", () => {
     expect(fn(config)).toEqual(config)
   })
   test("should not call getters during creation", ()=>{
-    const getA = jest.fn()
-    , getB = jest.fn()
+    const getA = crTestFn()
+    , getB = crTestFn()
     , config = {
       get a() { return getA(); },
       get b() { return getB(); }

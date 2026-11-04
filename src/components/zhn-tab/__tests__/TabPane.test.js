@@ -1,8 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
 import zhnUtils from '../../_test-utils/zhn-test-utils';
 import TabPane from '../TabPane';
 import Tab from '../Tab';
@@ -17,7 +12,7 @@ const {
   setupUserEvent
 } = zhnUtils;
 
-const SELECTED_STYLE = "font-weight: bold";
+const SELECTED_STYLE = "font-weight: 700";
 
 const Comp = ({
   text,

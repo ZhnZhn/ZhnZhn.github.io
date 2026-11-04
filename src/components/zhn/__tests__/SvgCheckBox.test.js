@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
+import { crTestFn } from '@testHelpers';
+
 import zhnUtils from '../../_test-utils/zhn-test-utils';
 import SvgCheckBox from '../SvgCheckBox';
 
@@ -34,8 +31,8 @@ describe('SvgCheckBox',()=>{
   test('should render SvgCheckBox with initialValue and handlers', async ()=>{
     const initialValue = false
     , checkedColor = '#222222'
-    , onCheck = jest.fn()
-    , onUnCheck = jest.fn()
+    , onCheck = crTestFn()
+    , onUnCheck = crTestFn()
     , props = { initialValue, checkedColor, onCheck, onUnCheck }
     , {
       user,
@@ -87,8 +84,8 @@ describe('SvgCheckBox',()=>{
     const value = false
     , initValue = true
     , checkedColor = '#222222'
-    , onCheck = jest.fn()
-    , onUnCheck = jest.fn()
+    , onCheck = crTestFn()
+    , onUnCheck = crTestFn()
     , props = { value, initValue, checkedColor, onCheck, onUnCheck }
     , {
       user,

@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
+import { crTestFn } from '@testHelpers';
+
 import zhnUtils from '../../_test-utils/zhn-test-utils';
 import InputSecret from '../InputSecret';
 
@@ -21,7 +18,7 @@ describe('InputSecret', () =>{
   const placeholder = 'api-key';
   //, _findInput = () => screen.findByPlaceholderText(placeholder);
   test('should render InputSecret with event handlers and ref', async ()=> {
-    const onEnter = jest.fn()
+    const onEnter = crTestFn()
     , refEl = createRef()
     //1 Test render
     , {

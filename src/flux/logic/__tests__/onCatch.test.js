@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import onCatch from '../onCatch'
 import {
   ERR_10,
@@ -15,7 +17,7 @@ const _crAlertDescrFrom = ({
 
 describe('onCatch', ()=>{
   test('should call onFailed with option with alertDesr', ()=>{
-    const onFailed = jest.fn()
+    const onFailed = crTestFn()
     , _callWithAndTestFor = (error, errDescr) => {
         onCatch({ error, option: {}, onFailed })
         expect(onFailed)

@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import { createStore } from '../zustand-lite';
 
 describe("createStore", () => {
@@ -78,7 +80,7 @@ describe("createStore", () => {
       setState,
       subscribe
     } = fn(() => NaN)
-    , _onSubscribe = jest.fn();
+    , _onSubscribe = crTestFn();
 
     subscribe(_onSubscribe)
     setState(NaN)

@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
+import { crTestFn } from '@testHelpers';
+
 import zhnUtils from '../../_test-utils/zhn-test-utils';
 import DateField from '../DateField';
 
@@ -18,7 +15,7 @@ const {
 describe("DateField", () => {
   const _findInput = () => screen.findByRole('textbox');
   test('', async () => {
-    const onEnter = jest.fn()
+    const onEnter = crTestFn()
     , refEl = createRef()
     , initialValue="2010-01-01"
     //1 Test render with initialValue

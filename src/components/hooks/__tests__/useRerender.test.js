@@ -1,7 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
+import { crTestFn } from '@testHelpers';
+
 import {
   render,
   screen,
@@ -30,7 +28,7 @@ const _testRenderAfterClickBt = (
 describe('useForceUpdate', ()=>{
   test('should return same function and rerender component when called', ()=>{
     const fns = new Set()
-    , renderSpy = jest.fn();
+    , renderSpy = crTestFn();
 
     function Comp() {
       /*eslint-disable testing-library/render-result-naming-convention*/

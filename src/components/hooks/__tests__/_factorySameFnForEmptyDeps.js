@@ -1,3 +1,4 @@
+import { crTestFn } from '@testHelpers';
 import { renderHook } from '@testing-library/react';
 
 describe('_factorySameFnForEmptyDeps', ()=>{
@@ -5,7 +6,7 @@ describe('_factorySameFnForEmptyDeps', ()=>{
 })
 
 const factorySameFnForEmptyDeps = (useHook) => () => {
-  const fn = jest.fn()
+  const fn = crTestFn()
   //1 Test return type
   , {
     result,
@@ -23,7 +24,7 @@ const factorySameFnForEmptyDeps = (useHook) => () => {
   expect(_fn).toEqual(result.current)
 
   //2.2 With new fn
-  rerender({ fn: jest.fn() })
+  rerender({ fn: crTestFn() })
   expect(_fn).toEqual(result.current)
 
   //2.3 With empty fn

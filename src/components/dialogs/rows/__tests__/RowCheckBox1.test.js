@@ -1,8 +1,5 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
-import '@testing-library/jest-dom';
+import { crTestFn } from '@testHelpers';
+
 import zhnUtils from '../../../_test-utils/zhn-test-utils';
 import RowCheckBox1 from '../RowCheckBox1';
 
@@ -96,8 +93,8 @@ describe('RowCheckBox1', ()=>{
     const initialValue = false
     , caption = 'CheckBox'
     , color = '#222222'
-    , onCheck = jest.fn()
-    , onUnCheck = jest.fn()
+    , onCheck = crTestFn()
+    , onUnCheck = crTestFn()
     , props = {
        initialValue,
        color,

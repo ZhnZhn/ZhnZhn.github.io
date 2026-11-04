@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -10,7 +12,7 @@ const _getRefItems = result => result.current[0]
 
 describe("useSelectItem", ()=>{
   test("should return tuple with refItems, hSelect, tupleFilter", ()=>{
-    const setChartConfigFromItem = jest.fn()
+    const setChartConfigFromItem = crTestFn()
     , {
       result
     } = renderHook(() => useSelectItem(setChartConfigFromItem));

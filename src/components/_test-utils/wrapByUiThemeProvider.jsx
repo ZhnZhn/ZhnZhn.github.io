@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-"use strict";
 import initialTheme from '../styles/uiTheme';
 import ThemeContext from '../hoc/ThemeContext';
 

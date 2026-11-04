@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   crObjWithNullPrototype,
   safeMap,
@@ -68,8 +70,8 @@ describe("focusRefElement", ()=>{
   });
 
   test('should call focus function from ref1', () => {
-    const focus1 = jest.fn()
-    , focus2 = jest.fn()
+    const focus1 = crTestFn()
+    , focus2 = crTestFn()
     , ref1 = _crRefWithFocus(focus1)
     , ref2 = _crRefWithFocus(focus2);
 
@@ -79,7 +81,7 @@ describe("focusRefElement", ()=>{
   })
 
   test('should call focus function from ref2', ()=>{
-    const focus2 = jest.fn()
+    const focus2 = crTestFn()
     , ref2 = _crRefWithFocus(focus2);
 
     fn(void 0, ref2)

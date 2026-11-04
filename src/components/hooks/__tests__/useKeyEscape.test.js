@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -8,7 +10,7 @@ import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps';
 
 describe('useKeyEscape', ()=>{
   test('', ()=>{
-    const onEscape = jest.fn()
+    const onEscape = crTestFn()
     //1 Test return type
     , {
       result,
@@ -25,8 +27,8 @@ describe('useKeyEscape', ()=>{
     //2.1 KeyDown Escape
     const _eventEscape = {
       keyCode: 27,
-      preventDefault: jest.fn(),
-      stopPropagation: jest.fn()
+      preventDefault: crTestFn(),
+      stopPropagation: crTestFn()
     }
     act(() => _onKeyEscape(_eventEscape))
     expect(result.current).toEqual(_onKeyEscape)
@@ -45,7 +47,7 @@ describe('useKeyEscape', ()=>{
     rerender({ onEscape })
     expect(_onKeyEscape).toEqual(result.current)
     //3.2 With new onEnter
-    rerender({ onEnter: jest.fn() })
+    rerender({ onEnter: crTestFn() })
     expect(_onKeyEscape).not.toEqual(result.current)
   })
 

@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -8,13 +10,13 @@ import factorySameFnForEmptyDeps from './_factorySameFnForEmptyDeps'
 
 const _crKeyEvent = keyCode => ({
   keyCode,
-  preventDefault: jest.fn(),
-  stopPropagation: jest.fn()
+  preventDefault: crTestFn(),
+  stopPropagation: crTestFn()
 })
 
 describe('useKeyEnter', ()=>{
   test('should return fn onKeyEnter depended of deps', ()=>{
-    const onEnter = jest.fn()
+    const onEnter = crTestFn()
     //1 Test return type
     , {
       result,
@@ -54,7 +56,7 @@ describe('useKeyEnter', ()=>{
     rerender({ onEnter })
     expect(_onKeyEnter).toEqual(result.current)
     //3.2 With new onEnter
-    rerender({ onEnter: jest.fn() })
+    rerender({ onEnter: crTestFn() })
     expect(_onKeyEnter).not.toEqual(result.current)
   })
 

@@ -1,3 +1,5 @@
+import { crTestFn } from '@testHelpers';
+
 import {
   renderHook,
   act
@@ -6,10 +8,10 @@ import useInputKeyDown from '../useInputKeyDown';
 
 describe('useInputKeyDown', ()=>{
   test('should return handler for input KeyDown', ()=>{
-    const onEnter = jest.fn()
-    , onDelete = jest.fn()
-    , stopPropagation = jest.fn()
-    , stopImmediatePropagation = jest.fn()
+    const onEnter = crTestFn()
+    , onDelete = crTestFn()
+    , stopPropagation = crTestFn()
+    , stopImmediatePropagation = crTestFn()
     , evt = {
       stopPropagation,
       nativeEvent: {
@@ -46,7 +48,7 @@ describe('useInputKeyDown', ()=>{
     expect(stopImmediatePropagation).toHaveBeenCalledTimes(1)
 
     //3.1 Test onDelete for Escape
-    const preventDefault = jest.fn()
+    const preventDefault = crTestFn()
     act(() => onKeyDown({
       ...evt,
       preventDefault,
