@@ -2,12 +2,14 @@
 
 exports.__esModule = true;
 exports.default = void 0;
+var _a11yFn = require("../a11yFn");
 var _Svg = require("./svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_BT_MORE = 'bt-more';
 const SvgMore = props => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-  type: "button",
+  ...(0, _a11yFn.crAriaLabelProp)(props),
   ref: props.refEl,
+  type: "button",
   className: CL_BT_MORE,
   style: props.style,
   onClick: props.onClick,

@@ -1,11 +1,13 @@
+import { crAriaLabelProp } from '../a11yFn';
 import { Svg } from './svg/Svg';
 
 const CL_BT_MORE = 'bt-more';
 
 const SvgMore = (props) => (
   <button
-    type="button"
+    {...crAriaLabelProp(props)}
     ref={props.refEl}
+    type="button"
     className={CL_BT_MORE}
     style={props.style}
     onClick={props.onClick}
