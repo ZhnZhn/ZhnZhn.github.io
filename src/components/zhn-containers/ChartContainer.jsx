@@ -11,6 +11,7 @@ import {
 } from '../uiApi';
 
 import {
+  ARL_OPEN_ITEMS_MENU,
   crPresentationRole
 } from '../a11yFn';
 
@@ -214,6 +215,7 @@ const ChartContainer = (props) => {
         />
       }
       <BrowserCaption
+         ariaLabel={ARL_OPEN_ITEMS_MENU}
          style={S_BR_CAPTION}
          onMore={_showMenuMore}
          onCheck={_hSetActive}

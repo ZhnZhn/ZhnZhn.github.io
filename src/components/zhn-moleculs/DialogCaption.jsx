@@ -4,6 +4,9 @@ import { BtSvgClose } from '../zhn/BtSvgX';
 import MenuMore from './MenuMore';
 
 import {
+  ARL_OPEN_DIALOG_MENU
+} from '../a11yFn'
+import {
   CL_NOT_SELECTED,
   crElementCn
 } from '../styleFn';
@@ -27,6 +30,7 @@ const DialogCaption = (props) => {
   return (
     <div className={CL_EL} style={S_CAPTION_DIV}>
       <MenuMore
+         ariaLabel={ARL_OPEN_DIALOG_MENU}
          refEl={props.refBtMenuMore}
          isMore={isMenuMore}
          menuModel={props.menuModel}

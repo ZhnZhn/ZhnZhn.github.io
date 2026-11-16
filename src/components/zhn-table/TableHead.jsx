@@ -3,9 +3,11 @@ import { filterBoolean } from '../../utils/arrFn';
 import { isKeyEnterOrBlank } from '../hooks/fUseKey';
 import SvgMore from '../zhn/SvgMore';
 
+import { ARL_OPEN_TABLE_MENU } from '../a11yFn';
 import { CL_BLACK } from '../styleFn';
+
 import { crAppearance } from './tableFn';
-import {  
+import {
   S_THEAD,
   S_TH,
   S_BT_SVG_MORE,
@@ -21,9 +23,13 @@ const C = {
   DESC: 'descending'
 };
 
-const ThMore = ({ name, onMenuMore }) => (
+const ThMore = ({
+  name,
+  onMenuMore
+}) => (
   <>
     <SvgMore
+       ariaLabel={ARL_OPEN_TABLE_MENU}
        style={S_BT_SVG_MORE}
        svgStyle={crSvgMoreStyle()}
        onClick={onMenuMore}
@@ -34,7 +40,10 @@ const ThMore = ({ name, onMenuMore }) => (
   </>
 );
 
-const _renderHeader = (props, _hThKeyDown) => {
+const _renderHeader = (
+  props,
+  _hThKeyDown
+) => {
   const {
     gridId,
     thMoreStyle,

@@ -1,7 +1,6 @@
 import { crAriaLabelProp } from '../a11yFn';
 import { crBtSvgCn } from '../styleFn';
 
-import Button from './Button';
 import {
   Svg,
   STROKE_LINECAP_ROUND_PROPS
@@ -12,19 +11,20 @@ const CL_BT_SVG_CIRCLE = crBtSvgCn("circle")
   pathElement,
   dfAriaLabel
 ) => (props) => (
-  <Button
+  <button
     {...crAriaLabelProp(props, dfAriaLabel)}
+    type="button"
     className={CL_BT_SVG_CIRCLE}
     style={props.style}
     onClick={props.onClick}
   >
      <Svg
        w="20"
-       {...STROKE_LINECAP_ROUND_PROPS}       
+       {...STROKE_LINECAP_ROUND_PROPS}
      >
        {pathElement}
      </Svg>
-  </Button>
+  </button>
 );
 
 export const SvgMinus = _fBtCircleSvg(

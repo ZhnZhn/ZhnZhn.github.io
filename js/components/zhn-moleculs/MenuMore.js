@@ -13,6 +13,7 @@ const CL_MENU_MORE = 'dialog__menu-more',
 const MenuMore = props => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_uiApi.IfTrue, {
   v: props.menuModel,
   children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
+    ariaLabel: props.ariaLabel,
     refEl: props.refEl,
     style: S_BT_MORE,
     onClick: props.toggle

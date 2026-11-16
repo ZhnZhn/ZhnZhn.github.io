@@ -6,6 +6,7 @@ exports.default = void 0;
 var _useMenuToggle = _interopRequireDefault(require("../hooks/useMenuToggle"));
 var _BtSvgX = require("../zhn/BtSvgX");
 var _MenuMore = _interopRequireDefault(require("./MenuMore"));
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _jsxRuntime = require("react/jsx-runtime");
 const CL_EL = (0, _styleFn.crElementCn)(),
@@ -24,6 +25,7 @@ const DialogCaption = props => {
     className: CL_EL,
     style: S_CAPTION_DIV,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_MenuMore.default, {
+      ariaLabel: _a11yFn.ARL_OPEN_DIALOG_MENU,
       refEl: props.refBtMenuMore,
       isMore: isMenuMore,
       menuModel: props.menuModel,

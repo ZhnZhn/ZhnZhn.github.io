@@ -1,5 +1,11 @@
 //import PropTypes from "prop-types";
-import { isFn, useId } from '../uiApi';
+import {
+  isFn,
+  useId
+} from '../uiApi';
+import {
+  ARL_OPEN_BROWSER_MENU
+} from '../a11yFn';
 import {
   crElementCn,
   crNotSelectedCn
@@ -24,9 +30,10 @@ S_CHECK_BOX = {
   position: 'relative',
   top: -3,
   margin: '0 10px 0 6px'
-};
+}
 
 const BrowserCaption = ({
+  ariaLabel = ARL_OPEN_BROWSER_MENU,
   style,
   captionStyle,
   caption,
@@ -46,8 +53,9 @@ const BrowserCaption = ({
        {
          isFn(onMore) &&
          <SvgMore
-            style={svgMoreStyle}
-            onClick={onMore}
+           ariaLabel={ariaLabel}
+           style={svgMoreStyle}
+           onClick={onMore}
          />
        }
        {

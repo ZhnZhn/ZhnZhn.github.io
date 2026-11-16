@@ -1,5 +1,10 @@
 //import PropTypes from "prop-types";
-import { useId } from '../uiApi';
+import {
+  useId
+} from '../uiApi';
+import {
+  ARL_OPEN_ITEM_MENU
+} from '../a11yFn';
 import {
   CL_CHARTS_MENU_MORE,
   crStyle2,
@@ -70,6 +75,7 @@ const MenuMore = ({
   return moreModel ? (<>
       <SvgMore
         refEl={refBtSvg}
+        ariaLabel={ARL_OPEN_ITEM_MENU}
         style={S_BT_MORE}
         svgStyle={S_SVG_MORE}
         onClick={onToggle}

@@ -10,6 +10,7 @@ const CL_MENU_MORE = 'dialog__menu-more'
 const MenuMore = (props) => (
   <IfTrue v={props.menuModel}>
     <SvgMore
+      ariaLabel={props.ariaLabel}
       refEl={props.refEl}
       style={S_BT_MORE}
       onClick={props.toggle}

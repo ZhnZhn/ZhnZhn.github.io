@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _Color = require("../styles/Color");
 var _SvgMore = _interopRequireDefault(require("./SvgMore"));
@@ -25,23 +26,24 @@ const CL_TEXT_CLIP = 'text-clip',
     top: -3,
     margin: '0 10px 0 6px'
   };
-const BrowserCaption = _ref => {
-  let {
-    style,
-    captionStyle,
-    caption,
-    svgMoreStyle,
-    children,
-    onMore,
-    onCheck,
-    onUnCheck,
-    onClose
-  } = _ref;
+const BrowserCaption = ({
+  ariaLabel = _a11yFn.ARL_OPEN_BROWSER_MENU,
+  style,
+  captionStyle,
+  caption,
+  svgMoreStyle,
+  children,
+  onMore,
+  onCheck,
+  onUnCheck,
+  onClose
+}) => {
   const captionId = (0, _uiApi.useId)();
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: CL_BR_CAPTION,
     style: style,
     children: [(0, _uiApi.isFn)(onMore) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
+      ariaLabel: ariaLabel,
       style: svgMoreStyle,
       onClick: onMore
     }), (0, _uiApi.isFn)(onCheck) && (0, _uiApi.isFn)(onUnCheck) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgCheckBox.default, {

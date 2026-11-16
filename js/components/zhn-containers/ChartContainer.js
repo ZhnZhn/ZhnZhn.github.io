@@ -122,6 +122,7 @@ const ChartContainer = props => {
       onClose: _hideCompareTo,
       onCompareTo: _compareTo
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_BrowserCaption.default, {
+      ariaLabel: _a11yFn.ARL_OPEN_ITEMS_MENU,
       style: S_BR_CAPTION,
       onMore: _showMenuMore,
       onCheck: _hSetActive,

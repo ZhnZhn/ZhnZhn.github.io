@@ -6,6 +6,7 @@ exports.default = void 0;
 var _arrFn = require("../../utils/arrFn");
 var _fUseKey = require("../hooks/fUseKey");
 var _SvgMore = _interopRequireDefault(require("../zhn/SvgMore"));
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _tableFn = require("./tableFn");
 var _Style = require("./Style");
@@ -16,22 +17,20 @@ const C = {
   ASC: 'ascending',
   DESC: 'descending'
 };
-const ThMore = _ref => {
-  let {
-    name,
-    onMenuMore
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
-      style: _Style.S_BT_SVG_MORE,
-      svgStyle: (0, _Style.crSvgMoreStyle)(),
-      onClick: onMenuMore
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      style: _Style.S_TH_MORE_SPAN,
-      children: name
-    })]
-  });
-};
+const ThMore = ({
+  name,
+  onMenuMore
+}) => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
+    ariaLabel: _a11yFn.ARL_OPEN_TABLE_MENU,
+    style: _Style.S_BT_SVG_MORE,
+    svgStyle: (0, _Style.crSvgMoreStyle)(),
+    onClick: onMenuMore
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    style: _Style.S_TH_MORE_SPAN,
+    children: name
+  })]
+});
 const _renderHeader = (props, _hThKeyDown) => {
   const {
     gridId,

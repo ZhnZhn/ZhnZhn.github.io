@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 var _uiApi = require("../uiApi");
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _useToggle = require("../hooks/useToggle");
 var _useFocus = require("../hooks/useFocus");
@@ -47,16 +48,16 @@ const CL_ITEM_HEADER = (0, _styleFn.crItemCaptionCn)("item-header"),
     width: void 0,
     maxWidth: 'calc(100% - 60px)'
   };
-const MenuMore = _ref => {
-  let {
-    isMore,
-    moreModel,
-    onToggle
-  } = _ref;
+const MenuMore = ({
+  isMore,
+  moreModel,
+  onToggle
+}) => {
   const [refBtSvg, toggleFocus] = (0, _useFocus.useFnFocus)(onToggle);
   return moreModel ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_SvgMore.default, {
       refEl: refBtSvg,
+      ariaLabel: _a11yFn.ARL_OPEN_ITEM_MENU,
       style: S_BT_MORE,
       svgStyle: S_SVG_MORE,
       onClick: onToggle
@@ -68,23 +69,22 @@ const MenuMore = _ref => {
     })]
   }) : null;
 };
-const Header = _ref2 => {
-  let {
-    isOpen,
-    onCheck,
-    onUnCheck,
-    itemCaption,
-    itemTitle,
-    itemValue,
-    itemTime,
-    onToggle,
-    valueMoving,
-    isAdminMode,
-    crValueMoving,
-    refVm,
-    moreModel,
-    onClose
-  } = _ref2;
+const Header = ({
+  isOpen,
+  onCheck,
+  onUnCheck,
+  itemCaption,
+  itemTitle,
+  itemValue,
+  itemTime,
+  onToggle,
+  valueMoving,
+  isAdminMode,
+  crValueMoving,
+  refVm,
+  moreModel,
+  onClose
+}) => {
   const _captionId = (0, _uiApi.useId)(),
     [isMore, _toggleMore] = (0, _useToggle.useToggle)(false),
     _captionStyle = (0, _styleFn.crStyle2)(S_CAPTION, !valueMoving && S_CAPTION_WIDTH);
