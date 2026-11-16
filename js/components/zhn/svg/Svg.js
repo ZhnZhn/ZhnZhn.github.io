@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.SvgArrowDown = exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.FILL_NONE = exports.EVENODD_PROPS = void 0;
+exports.SvgArrowRight = exports.SvgArrowLeft = exports.SvgArrowDown = exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.FILL_NONE = exports.EVENODD_PROPS = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const FILL_NONE = exports.FILL_NONE = "none";
 const EVENODD_PROPS = exports.EVENODD_PROPS = {
@@ -55,4 +55,26 @@ const SvgArrowDown = ({
   })
 });
 exports.SvgArrowDown = SvgArrowDown;
+const S_ARROW = {
+    stroke: 'currentColor',
+    strokeWidth: 2.5,
+    strokeLinecap: 'round'
+  },
+  S_ARROW_RIGHT = {
+    transform: 'rotate(270deg)'
+  },
+  S_ARROW_LEFT = {
+    transform: 'rotate(90deg)'
+  };
+const _fSvgArrow = arrowStyle => ({
+  style
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgArrowDown, {
+  style: {
+    ...S_ARROW,
+    ...arrowStyle,
+    ...style
+  }
+});
+const SvgArrowRight = exports.SvgArrowRight = _fSvgArrow(S_ARROW_RIGHT);
+const SvgArrowLeft = exports.SvgArrowLeft = _fSvgArrow(S_ARROW_LEFT);
 //# sourceMappingURL=Svg.js.map

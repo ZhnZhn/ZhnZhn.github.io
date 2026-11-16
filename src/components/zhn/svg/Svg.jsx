@@ -72,3 +72,30 @@ export const SvgArrowDown = ({
     <path d="M 3,6 L 10,12.5 M 10,12.5 L 17,6" />
   </Svg>
 )
+
+const S_ARROW = {
+  stroke: 'currentColor',
+  strokeWidth: 2.5,
+  strokeLinecap: 'round',
+}
+, S_ARROW_RIGHT = {
+  transform: 'rotate(270deg)'
+}
+, S_ARROW_LEFT = {
+  transform: 'rotate(90deg)'
+};
+
+const _fSvgArrow = (arrowStyle) => ({
+  style
+}) => (
+  <SvgArrowDown
+    style={{
+      ...S_ARROW,
+      ...arrowStyle,
+      ...style
+    }}
+  />
+);
+
+export const SvgArrowRight = _fSvgArrow(S_ARROW_RIGHT)
+export const SvgArrowLeft = _fSvgArrow(S_ARROW_LEFT)

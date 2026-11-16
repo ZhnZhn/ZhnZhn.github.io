@@ -12,6 +12,7 @@ import {
   crAbsoluteTopLeftStyle
 } from '../styleFn';
 
+import { SvgArrowRight } from '../zhn/svg/Svg';
 import InputSwitch from '../zhn/InputSwitch';
 
 const SUB_MENU = 'sub'
@@ -24,16 +25,13 @@ const SUB_MENU = 'sub'
 }
 , S_NEXT_PAGE = {
   ...S_INLINE,
-  ...crAbsoluteTopLeftStyle(0, 4, !0),
-  color: 'inherit',
-  padding: '1px 16px 1px 0',
-  fontWeight: 'bold'
+  ...crAbsoluteTopLeftStyle(8, 6, !0)
 };
 
 const NextPageArrow = ({
   type
 }) => type === SUB_MENU
- ? (<span style={S_NEXT_PAGE}>{">"}</span>)
+ ? (<SvgArrowRight style={S_NEXT_PAGE}/>)
  : null;
 
 const MenuItemList = ({
