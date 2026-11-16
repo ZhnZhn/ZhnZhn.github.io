@@ -1,3 +1,4 @@
+import { crAriaLabelProp } from '../a11yFn';
 import { crBtSvgCn } from '../styleFn';
 
 import {
@@ -8,14 +9,13 @@ import {
 const S_SVG_X = { padding: 3 };
 const _fCrBtSvgX = (
   className,
-  dfAriaLabel,
-  crProps
+  dfAriaLabel
 ) => (
   props
 ) => (
   <button
-    {...crProps(props)}
-    aria-label={props.ariaLabel || dfAriaLabel}
+    {...crAriaLabelProp(props, dfAriaLabel)}
+    ref={props.refEl}
     type="button"
     tabIndex="-1"
     className={className}
@@ -35,12 +35,10 @@ const _fCrBtSvgX = (
 
 export const BtSvgClear = _fCrBtSvgX(
   crBtSvgCn("clear"),
-  "Clear input",
-  props => ({ref: props.refEl})
+  "Clear input"
 )
 
 export const BtSvgClose = _fCrBtSvgX(
   crBtSvgCn("close"),
-  "Close",
-  () => {}
+  "Close"
 )

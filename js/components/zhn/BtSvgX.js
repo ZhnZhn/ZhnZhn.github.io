@@ -2,15 +2,16 @@
 
 exports.__esModule = true;
 exports.BtSvgClose = exports.BtSvgClear = void 0;
+var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _Svg = require("./svg/Svg");
 var _jsxRuntime = require("react/jsx-runtime");
 const S_SVG_X = {
   padding: 3
 };
-const _fCrBtSvgX = (className, dfAriaLabel, crProps) => props => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-  ...crProps(props),
-  "aria-label": props.ariaLabel || dfAriaLabel,
+const _fCrBtSvgX = (className, dfAriaLabel) => props => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+  ...(0, _a11yFn.crAriaLabelProp)(props, dfAriaLabel),
+  ref: props.refEl,
   type: "button",
   tabIndex: "-1",
   className: className,
@@ -27,8 +28,6 @@ const _fCrBtSvgX = (className, dfAriaLabel, crProps) => props => /*#__PURE__*/(0
     })]
   })
 });
-const BtSvgClear = exports.BtSvgClear = _fCrBtSvgX((0, _styleFn.crBtSvgCn)("clear"), "Clear input", props => ({
-  ref: props.refEl
-}));
-const BtSvgClose = exports.BtSvgClose = _fCrBtSvgX((0, _styleFn.crBtSvgCn)("close"), "Close", () => {});
+const BtSvgClear = exports.BtSvgClear = _fCrBtSvgX((0, _styleFn.crBtSvgCn)("clear"), "Clear input");
+const BtSvgClose = exports.BtSvgClose = _fCrBtSvgX((0, _styleFn.crBtSvgCn)("close"), "Close");
 //# sourceMappingURL=BtSvgX.js.map
