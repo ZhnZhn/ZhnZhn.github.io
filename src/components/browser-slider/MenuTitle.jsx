@@ -1,4 +1,5 @@
 import { crMenuItemRole } from '../a11yFn';
+import { SvgArrowLeft } from '../zhn/svg/Svg';
 
 import {
   CL_MENU_ITEM,
@@ -18,9 +19,7 @@ const MenuTitle = ({
     style={S_TITLE}
   >
     {title}
-    <span style={S_TITLE_ARROW}>
-      {'<'}
-    </span>
+    <SvgArrowLeft style={S_TITLE_ARROW} />
   </div>
 );
 

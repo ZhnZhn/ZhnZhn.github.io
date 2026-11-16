@@ -22,7 +22,7 @@ export const S_TITLE = {
   cursor: 'pointer'
 }
 
-export const S_TITLE_ARROW = crAbsoluteTopLeftStyle(8, 16)
+export const S_TITLE_ARROW = crAbsoluteTopLeftStyle(8, 6)
 
 const _CL_MENU_ITEM_BLACK = `${CL_MENU_ITEM} ${CL_BLACK}`
 , _S_ITEM_T = {
