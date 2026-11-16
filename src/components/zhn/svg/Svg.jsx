@@ -34,7 +34,7 @@ export const Svg = ({
       `${w}px`,
       `${h}px`,
       `0 0 ${w} ${h}`
-    )}    
+    )}
     {...restProps}
   >
     {children}
@@ -58,4 +58,17 @@ export const Svg100 = ({
   >
     {children}
   </svg>
+)
+
+export const SvgArrowDown = ({
+  style
+}) => (
+  <Svg
+    w="20"
+    aria-hidden="true"
+    focusable="false"
+    style={style}
+  >
+    <path d="M 3,6 L 10,12.5 M 10,12.5 L 17,6" />
+  </Svg>
 )

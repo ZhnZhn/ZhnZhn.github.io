@@ -1,5 +1,5 @@
 import { crAriaExpandedProps } from '../a11yFn';
-import { Svg } from '../zhn/svg/Svg';
+import { SvgArrowDown } from '../zhn/svg/Svg';
 import { CL_BT_ARROW } from './CL';
 
 const S_SVG_OPEN = {
@@ -25,14 +25,9 @@ const ArrowCell = ({
      className={CL_BT_ARROW}
      onClick={onClick}
   >
-    <Svg
-      w="20"
-      aria-hidden="true"
-      focusable="false"
+    <SvgArrowDown
       style={isShowOption ? S_SVG_OPEN : S_SVG_CLOSE}
-    >
-      <path d="M 3,6 L 10,12.5 M 10,12.5 L 17,6" />
-    </Svg>
+    />
   </button>
 );
 

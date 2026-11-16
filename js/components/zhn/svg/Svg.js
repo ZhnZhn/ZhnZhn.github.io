@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.FILL_NONE = exports.EVENODD_PROPS = void 0;
+exports.SvgArrowDown = exports.Svg100 = exports.Svg = exports.STROKE_LINECAP_ROUND_PROPS = exports.FILL_NONE = exports.EVENODD_PROPS = void 0;
 var _jsxRuntime = require("react/jsx-runtime");
 const FILL_NONE = exports.FILL_NONE = "none";
 const EVENODD_PROPS = exports.EVENODD_PROPS = {
@@ -20,33 +20,39 @@ const _crWidthHeightViewBoxProps = (width, height, viewBox) => ({
   height,
   viewBox
 });
-const Svg = _ref => {
-  let {
-    w,
-    h = w,
-    children,
-    ...restProps
-  } = _ref;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
-    ..._crWidthHeightViewBoxProps(`${w}px`, `${h}px`, `0 0 ${w} ${h}`),
-    ...restProps,
-    children: children
-  });
-};
+const Svg = ({
+  w,
+  h = w,
+  children,
+  ...restProps
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
+  ..._crWidthHeightViewBoxProps(`${w}px`, `${h}px`, `0 0 ${w} ${h}`),
+  ...restProps,
+  children: children
+});
 exports.Svg = Svg;
-const Svg100 = _ref2 => {
-  let {
-    w,
-    h = w,
-    children,
-    ...restProps
-  } = _ref2;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
-    ..._crWidthHeightViewBoxProps("100%", "100%", `0 0 ${w} ${h}`),
-    preserveAspectRatio: "none",
-    ...restProps,
-    children: children
-  });
-};
+const Svg100 = ({
+  w,
+  h = w,
+  children,
+  ...restProps
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
+  ..._crWidthHeightViewBoxProps("100%", "100%", `0 0 ${w} ${h}`),
+  preserveAspectRatio: "none",
+  ...restProps,
+  children: children
+});
 exports.Svg100 = Svg100;
+const SvgArrowDown = ({
+  style
+}) => /*#__PURE__*/(0, _jsxRuntime.jsx)(Svg, {
+  w: "20",
+  "aria-hidden": "true",
+  focusable: "false",
+  style: style,
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    d: "M 3,6 L 10,12.5 M 10,12.5 L 17,6"
+  })
+});
+exports.SvgArrowDown = SvgArrowDown;
 //# sourceMappingURL=Svg.js.map
