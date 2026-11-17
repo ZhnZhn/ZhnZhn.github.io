@@ -1,0 +1,6 @@
+web-app-erc@0.18.0 D:\_Dev\_React\_ERC
+`-- jest@30.5.2
+  `-- @jest/core@30.5.2
+    `-- jest-config@30.5.2
+      `-- deepmerge@4.2.2
+

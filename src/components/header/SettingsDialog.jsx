@@ -72,7 +72,7 @@ const SettingsDialog = memoIsShow(({
          data={data}
          onClose={onClose}
       >
-        <Tab title="ApiKeys">
+        <Tab title="API Keys">
           <PaneApiKey
              titleStyle={S_TITLE_API}
            />

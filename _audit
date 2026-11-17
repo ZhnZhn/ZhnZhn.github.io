@@ -1,0 +1,14 @@
+# npm audit report
+
+highcharts  <=11.4.8
+Severity: high
+Highcharts: `javascript:` URL in credits.href runs script on click - https://github.com/advisories/GHSA-5793-x2q3-c3q7
+Highcharts: dotted series.keys paths write to Object.prototype - https://github.com/advisories/GHSA-rmqc-xvr3-v46c
+fix available via `npm audit fix --force`
+Will install highcharts@13.1.1, which is a breaking change
+node_modules/highcharts
+
+1 high severity vulnerability
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
