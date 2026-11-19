@@ -1,10 +1,22 @@
+import { IfTrue } from '../uiApi';
+
 import Button from '../zhn/Button';
+import { SvgX } from '../zhn/BtSvgX';
+
 import {
   CL_FOOTER,
   CL_FOOTER_INDEX,
   CL_FOOTER_BTS,
-  CL_FOOTER_BT
+  COLOR_OPTIONS_OPEN
 } from './CL';
+
+const S_BT_X = {
+  backgroundColor: '#e1e1cb',
+  height: '32px',
+  padding: '6px',
+  stroke: COLOR_OPTIONS_OPEN,
+  borderRadius: '50%'
+};
 
 const OptionsFooter = (props) => (
   <div className={CL_FOOTER}>
@@ -16,12 +28,17 @@ const OptionsFooter = (props) => (
          : {props.nFiltered}: {props.nAll}
       </span>
     </span>
-    {!props.noFooterBts && <span className={CL_FOOTER_BTS}>
+    <IfTrue v={!props.noFooterBts}>
+    <span className={CL_FOOTER_BTS}>
       <Button
-         className={CL_FOOTER_BT}
-         onClick={props.onClear}
-      >CL</Button>
-    </span>}
+        aria-label="Clear input and close options"
+        style={S_BT_X}
+        onClick={props.onClear}
+      >
+        <SvgX />
+      </Button>
+    </span>
+    </IfTrue>
   </div>
 );
 
