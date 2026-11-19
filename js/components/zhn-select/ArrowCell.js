@@ -3,15 +3,12 @@
 exports.__esModule = true;
 exports.default = void 0;
 var _a11yFn = require("../a11yFn");
+var _styleFn = require("../styleFn");
 var _Svg = require("../zhn/svg/Svg");
 var _CL = require("./CL");
 var _jsxRuntime = require("react/jsx-runtime");
-const S_SVG_OPEN = {
-    color: "#1b75bb"
-  },
-  S_SVG_CLOSE = {
-    color: "#858585"
-  };
+const S_SVG_OPEN = (0, _styleFn.crColorStyle)(_CL.COLOR_OPTIONS_OPEN),
+  S_SVG_CLOSE = (0, _styleFn.crColorStyle)(_CL.COLOR_OPTIONS_CLOSE);
 const ArrowCell = ({
   isShowOption,
   labelId,

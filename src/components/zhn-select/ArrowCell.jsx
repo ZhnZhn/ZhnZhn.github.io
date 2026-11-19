@@ -1,13 +1,15 @@
 import { crAriaExpandedProps } from '../a11yFn';
-import { SvgArrowDown } from '../zhn/svg/Svg';
-import { CL_BT_ARROW } from './CL';
+import { crColorStyle } from '../styleFn';
 
-const S_SVG_OPEN = {
-  color: "#1b75bb"
-}
-, S_SVG_CLOSE = {
-  color: "#858585"
-};
+import { SvgArrowDown } from '../zhn/svg/Svg';
+import {
+  CL_BT_ARROW,
+  COLOR_OPTIONS_OPEN,
+  COLOR_OPTIONS_CLOSE
+} from './CL';
+
+const S_SVG_OPEN = crColorStyle(COLOR_OPTIONS_OPEN)
+, S_SVG_CLOSE = crColorStyle(COLOR_OPTIONS_CLOSE);
 
 const ArrowCell = ({
   isShowOption,
@@ -26,7 +28,10 @@ const ArrowCell = ({
      onClick={onClick}
   >
     <SvgArrowDown
-      style={isShowOption ? S_SVG_OPEN : S_SVG_CLOSE}
+      style={isShowOption
+        ? S_SVG_OPEN
+        : S_SVG_CLOSE
+      }
     />
   </button>
 );

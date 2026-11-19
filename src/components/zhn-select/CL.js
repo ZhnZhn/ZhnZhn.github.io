@@ -3,35 +3,28 @@ import {
   CL_TEXT_ELLIPSIS,
   CL_WIDTH_100_PERCENT,
   crCn,
-  crBtCircleHfCn,
-  crBtCircle2Cn
+  crNotSelectedCn
 } from '../styleFn';
+
+export const CL_ROOT = 'zhn-select'
+export const CL_INPUT = CL_ROOT + '__input'
+export const CL_BT_ARROW = CL_ROOT + '__bt-arrow'
+export const CL_SPINNER = CL_ROOT + '__spinner'
+export const CL_SPINNER_FAILED = CL_SPINNER + '--failed'
+export const CL_OPTIONS = CL_ROOT + '__options'
+export const CL_OPTIONS_DIV = CL_OPTIONS + '__div'
+export const CL_OPTIONS_ROW = CL_ROOT + '__row'
+export const CL_OPTIONS_ROW_ACTIVE = CL_OPTIONS_ROW + '--active'
 
 export const CL_ITEM_OPTION = crCn(
   CL_TEXT_ELLIPSIS,
   CL_WIDTH_100_PERCENT
-);
+)
 
-const ROOT = 'zhn-select'
-, INPUT = ROOT + '__input'
-, SPINNER = ROOT + '__spinner'
-, OPTIONS = ROOT + '__options'
-, OPTIONS_ROW = ROOT + '__row'
-, FOOTER = ROOT + '__footer';
-
-export const CL_ROOT = ROOT
-export const CL_INPUT = INPUT
-export const CL_SPINNER = SPINNER
-export const CL_SPINNER_FAILED = SPINNER + '--failed'
-export const CL_BT_ARROW = ROOT + '__bt-arrow'
-
-export const CL_OPTIONS = OPTIONS
-export const CL_OPTIONS_DIV = OPTIONS + '__div'
-
-export const CL_OPTIONS_ROW = OPTIONS_ROW
-export const CL_OPTIONS_ROW_ACTIVE = OPTIONS_ROW + '--active'
-
-export const CL_FOOTER = `${FOOTER} ${CL_NOT_SELECTED}`
+const FOOTER = CL_ROOT + '__footer';
+export const CL_FOOTER = crNotSelectedCn(FOOTER)
 export const CL_FOOTER_INDEX = FOOTER + '__index'
 export const CL_FOOTER_BTS = FOOTER + '__bts'
-export const CL_FOOTER_BT = crBtCircle2Cn(crBtCircleHfCn(FOOTER + '__bt'))
+
+export const COLOR_OPTIONS_OPEN = '#1b75bb'
+export const COLOR_OPTIONS_CLOSE = '#858585'
