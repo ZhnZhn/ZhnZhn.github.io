@@ -60,14 +60,14 @@
   background-color: #e1e1cb;
   color: green;
   width: 160px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-radius: 0 0 4px 4px;  
 }
 
 .zhn-select__options__div {
   content-visibility: auto;
   contain-intrinsic-size: auto 200px;
   max-height: 200px;
+  margin-bottom: -1px; 
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -102,8 +102,7 @@
   position: relative;  
   background-color: #7d7d7d;
   line-height: 1.5;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-radius: 0 0 2px 2px;  
 }
 .zhn-select__footer__index {
   display: inline-block;
@@ -116,10 +115,4 @@
   position: absolute;
   top: 4px;
   right: 4px;
-  color: black;
-  font-weight: bold;
-}
-.zhn-select__footer__bt {
-  margin-right: 4px;
-  background-color: #949ab4;
 }
