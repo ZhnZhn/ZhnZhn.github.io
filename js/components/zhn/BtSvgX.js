@@ -1,7 +1,7 @@
 "use strict";
 
 exports.__esModule = true;
-exports.BtSvgClose = exports.BtSvgClear = void 0;
+exports.SvgX = exports.BtSvgClose = exports.BtSvgClear = void 0;
 var _a11yFn = require("../a11yFn");
 var _styleFn = require("../styleFn");
 var _Svg = require("./svg/Svg");
@@ -9,6 +9,17 @@ var _jsxRuntime = require("react/jsx-runtime");
 const S_SVG_X = {
   padding: 3
 };
+const SvgX = () => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.Svg100, {
+  w: "12",
+  style: S_SVG_X,
+  ..._Svg.STROKE_LINECAP_ROUND_PROPS,
+  children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    d: "M 0,0 L 12,12"
+  }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+    d: "M 12,0 L 0,12"
+  })]
+});
+exports.SvgX = SvgX;
 const _fCrBtSvgX = (className, dfAriaLabel) => props => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
   ...(0, _a11yFn.crAriaLabelProp)(props, dfAriaLabel),
   ref: props.refEl,
@@ -17,16 +28,7 @@ const _fCrBtSvgX = (className, dfAriaLabel) => props => /*#__PURE__*/(0, _jsxRun
   className: className,
   style: props.style,
   onClick: props.onClick,
-  children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Svg.Svg100, {
-    w: "12",
-    style: S_SVG_X,
-    ..._Svg.STROKE_LINECAP_ROUND_PROPS,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-      d: "M 0,0 L 12,12"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
-      d: "M 12,0 L 0,12"
-    })]
-  })
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)(SvgX, {})
 });
 const BtSvgClear = exports.BtSvgClear = _fCrBtSvgX((0, _styleFn.crBtSvgCn)("clear"), "Clear input");
 const BtSvgClose = exports.BtSvgClose = _fCrBtSvgX((0, _styleFn.crBtSvgCn)("close"), "Close");

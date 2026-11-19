@@ -7,6 +7,18 @@ import {
 } from './svg/Svg';
 
 const S_SVG_X = { padding: 3 };
+export const SvgX = () => (
+  <Svg100
+    w="12"
+    style={S_SVG_X}
+    {...STROKE_LINECAP_ROUND_PROPS}
+   >
+     <path d="M 0,0 L 12,12" />
+     <path d="M 12,0 L 0,12" />
+  </Svg100>
+)
+
+
 const _fCrBtSvgX = (
   className,
   dfAriaLabel
@@ -22,14 +34,7 @@ const _fCrBtSvgX = (
     style={props.style}
     onClick={props.onClick}
   >
-    <Svg100
-      w="12"
-      style={S_SVG_X}
-      {...STROKE_LINECAP_ROUND_PROPS}
-     >
-       <path d="M 0,0 L 12,12" />
-       <path d="M 12,0 L 0,12" />
-    </Svg100>
+    <SvgX />
   </button>
 );
 
